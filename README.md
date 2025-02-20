@@ -7,4 +7,4 @@ Pantallas de navegación:
     Ver detalles de cada película con descripción e imagen.
     Marcar películas como "Vista" o "Pendiente".
 
-La app permite subir imágenes desde la galería, agregar películas a una lista dinámica, y tiene un botón de guardar deshabilitado hasta que se llenen todos los datos. 
+La app permite subir imágenes desde la galería, agregar películas a una lista dinámica, y tiene un botón de guardar deshabilitado hasta que se llenen todos los datos.
