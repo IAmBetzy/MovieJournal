@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
-struct Movies: Identifiable {
+struct Movie: Identifiable {
     let id = UUID()
     var title: String
     var genre: String
-    var year: Int
-    var watched: Bool
+    var year: String
+    var description: String  //I added
+    var watched: Bool = false
     var imageName: String?
 }

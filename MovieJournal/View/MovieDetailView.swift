@@ -5,11 +5,11 @@
 //  Created by CETYS Universidad  on 19/02/25.
 //
 
-import SwiftUI
+/*import SwiftUI
 import PhotosUI
 
 struct MovieDetailView: View {
-    var movie: Movies
+    var movie: Movie
     
     @State private var selectedImage: UIImage?
     
@@ -54,7 +54,7 @@ struct MovieDetailView: View {
                     .foregroundColor(.gray)
             }
         }
-        .navigationTitle("Deja tu reseña de la pelicula!😠")
+        .navigationTitle("Deja tu reseña de la pelicula!")
         .toolbar{
             ToolbarItem(placement: .navigationBarTrailing){
                 Button(action: {
@@ -75,15 +75,9 @@ struct MovieDetailView: View {
     }
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleMovie = Movies(
-            title: "Shrek",
-            genre: "Animated/Sci-Fi",
-            year: 2001,
-            watched: false,
-            imageName: "shrek"
-        )
+        let sampleMovie = Movie(title: "Aladdin", genre: "fantasy", year: 1992, description: "aladdin y su lampara magica")
         
         MovieDetailView(movie: sampleMovie)
             .previewDevice("iPhone 12")
     }
-}
+}*/

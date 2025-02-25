@@ -29,23 +29,6 @@
 		2D1D965F2D66E413005DE5B3 /* MovieJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		2D3AC2472D6D6589004B98BD /* Exceptions for "MovieJournalUITests" folder in "MovieJournalUITests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				MovieJournalTests/MovieJournalTests.swift,
-			);
-			target = 2D1D965E2D66E413005DE5B3 /* MovieJournalUITests */;
-		};
-		2D3AC24B2D6D658D004B98BD /* Exceptions for "MovieJournalUITests" folder in "MovieJournalTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				MovieJournalTests/MovieJournalTests.swift,
-			);
-			target = 2D1D96542D66E413005DE5B3 /* MovieJournalTests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D1D96472D66E411005DE5B3 /* MovieJournal */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -54,10 +37,6 @@
 		};
 		2D1D96622D66E413005DE5B3 /* MovieJournalUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				2D3AC24B2D6D658D004B98BD /* Exceptions for "MovieJournalUITests" folder in "MovieJournalTests" target */,
-				2D3AC2472D6D6589004B98BD /* Exceptions for "MovieJournalUITests" folder in "MovieJournalUITests" target */,
-			);
 			path = MovieJournalUITests;
 			sourceTree = "<group>";
 		};
