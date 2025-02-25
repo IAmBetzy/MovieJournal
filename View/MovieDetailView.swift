@@ -52,10 +52,21 @@ struct MovieDetailView: View {
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                     .foregroundColor(.gray)
-            ToolBarItem(placement: .navigation)
             }
         }
-        
+        .navigationTitle("Deja tu reseña de la pelicula!😠")
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing){
+                Button(action: {
+                    showAddMoodView = true
+                }) {
+                    Image(systemName: "plus")
+                }
+            }
+            ToolbarItem(placement: .navigationBarLeading){
+                EditButton()
+            }
+        }
         
         func selectImage() {
             // Función para seleccionar una imagen de la galería o tomar una nueva foto.
