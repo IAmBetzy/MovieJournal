@@ -6,24 +6,23 @@
 //
 
 import SwiftUI
+//AGREGAR PARA QUE TOME FOTO TAMBIEN
 
 struct AddReviewView: View {
     @Environment(\.presentationMode) var presentationMode
  
     @State private var movie = Movie(title: "", genre: "" , year: "", description: "", watched: false, imageName: "")
     @State private var review = ""
-    @State private var selfieName = ""
+    @State private var selfie: UIImage? = nil
     @State private var date = Date()
     @State private var rating = ""
     @State private var latitude = Double()
     @State private var longitude = Double()
+    @State private var showImagePickerView: Bool = false
     @ObservedObject var reviewViewModel: ReviewViewModel
+    @ObservedObject var movieViewModel: MovieViewModel
 
-    let movies: [Movie] = [
-        Movie(title: "Aladdin", genre: "fantasy", year: "1992", description: "aladdin y su lampara magica"),
-        Movie(title: "Tierra de osos", genre: "adventure", year: "1999", description: "Un humano se convierte en un oso"),
-        Movie(title: "La la land", genre: "romance", year: "2019", description: "Bailarines en LA")
-    ]
+    //pasar al ReviewViewModel
     let ratings = ["★", "★★", "★★★", "★★★★", "★★★★★"]
 
     var body: some View {
@@ -31,8 +30,22 @@ struct AddReviewView: View {
             Form {
                 Section(header: Text("Add a new review")){
                     Picker("Select your movie", selection: $movie.title) {
-                        ForEach(movies, id: \.title) { movie in
+                        ForEach(movieViewModel.movies, id: \.title) { movie in
                             Text(movie.title)
+                        }
+                    }
+                    Button(action: {
+                        showImagePickerView = true
+                    }) {
+                        HStack {
+                            Text("Select Photo")
+                            Spacer()
+                            if let image = selfie {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                            }
                         }
                     }
                     TextField("Review", text: $review)
@@ -50,12 +63,17 @@ struct AddReviewView: View {
                 ToolbarItem(placement: .navigationBarTrailing){
                     //El save buttos debe ser activado SOLO cuando se llenaron todos los espacios
                     Button("Save"){
-                        //falta poner el espacio de la selfie, tambien en la funcion de add vie, se cambia cuando se agregue lo del picker
-                        reviewViewModel.addReview(movie: movie, review: review, selfie: UIImage(systemName: "photo" ), date: date, rating: rating, latitude: latitude, longitude: longitude)
+                        //falta poner el espacio de la selfie, tambien en la funcion de add view, se cambia cuando se agregue lo del picker
+                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
                         presentationMode.wrappedValue.dismiss()
                         
                     }
+                    .disabled(review.isEmpty || movie.title.isEmpty || rating.isEmpty)
                 }
+                
+            }
+            .sheet(isPresented: $showImagePickerView) {
+                ImagePickerView(image: $selfie)
             }
         }
     }
@@ -63,5 +81,5 @@ struct AddReviewView: View {
 }
 
 #Preview {
-    AddReviewView(reviewViewModel: .init())
+    AddReviewView(reviewViewModel: .init(), movieViewModel: .init())
 }

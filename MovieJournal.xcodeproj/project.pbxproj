@@ -40,21 +40,6 @@
 			path = MovieJournalUITests;
 			sourceTree = "<group>";
 		};
-		2D1D967A2D66E810005DE5B3 /* Model */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Model;
-			sourceTree = "<group>";
-		};
-		2D3AC2622D6D65C7004B98BD /* View */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = View;
-			sourceTree = "<group>";
-		};
-		2D3AC2662D6D65E3004B98BD /* ViewModel */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,9 +70,6 @@
 		2D1D963C2D66E411005DE5B3 = {
 			isa = PBXGroup;
 			children = (
-				2D1D967A2D66E810005DE5B3 /* Model */,
-				2D3AC2662D6D65E3004B98BD /* ViewModel */,
-				2D3AC2622D6D65C7004B98BD /* View */,
 				2D1D96622D66E413005DE5B3 /* MovieJournalUITests */,
 				2D1D96472D66E411005DE5B3 /* MovieJournal */,
 				2D1D96462D66E411005DE5B3 /* Products */,
@@ -121,9 +103,6 @@
 			);
 			fileSystemSynchronizedGroups = (
 				2D1D96472D66E411005DE5B3 /* MovieJournal */,
-				2D1D967A2D66E810005DE5B3 /* Model */,
-				2D3AC2622D6D65C7004B98BD /* View */,
-				2D3AC2662D6D65E3004B98BD /* ViewModel */,
 			);
 			name = MovieJournal;
 			packageProductDependencies = (

@@ -12,7 +12,7 @@ struct Review: Identifiable {
     let id = UUID()
     var movie: Movie //con movierow view que acceda a la pelicula
     var review: String
-    var selfieName: String?
+    var selfie: UIImage?
     var date: Date
     var rating: String //like emojis in moodtracker app
     var latitude: Double?

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+//VINCULAR MOVIE PIC
 
 struct ReviewRowView: View {
     var review:Review
@@ -13,8 +14,10 @@ struct ReviewRowView: View {
     var body: some View {
         HStack {
             //Display image
-            Image(systemName: "photo") //que obtenga la foto desde la pelicula enlazada (cambiar movie row primero)
-                .font(.largeTitle)
+            Image(review.movie.imageName)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 60, height: 70, alignment: .center)//que obtenga la foto desde la pelicula enlazada (cambiar movie row primero)
             VStack(alignment: .leading) {
                 Text(review.movie.title)
                     .font(.headline)
@@ -32,5 +35,5 @@ struct ReviewRowView: View {
 }
 
 #Preview {
-    ReviewRowView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion"), review: "me encanto", date: Date() , rating: "5 estrellas") )
+    ReviewRowView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"), review: "me encanto", date: Date() , rating: "5 estrellas") )
 }

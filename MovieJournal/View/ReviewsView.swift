@@ -13,6 +13,7 @@ import UIKit
 struct ReviewsView: View {
     @State private var showAddReviewView: Bool = false
     @ObservedObject var reviewViewModel: ReviewViewModel
+    @ObservedObject var movieViewModel: MovieViewModel
     
     //Las reviews base estan en ReviewViewModel, borrar Reviews 
         
@@ -21,6 +22,8 @@ struct ReviewsView: View {
             List{
                 ForEach(reviewViewModel.reviews) {review in NavigationLink(destination: ReviewDetailView(review: review)) {
                     ReviewRowView(review: review)
+                        .padding(.leading, -4.0)
+                        .padding(.vertical, 3.0)
                 }
                     
                 }
@@ -37,12 +40,12 @@ struct ReviewsView: View {
                 }
             }
             .sheet(isPresented: $showAddReviewView) {
-                AddReviewView(reviewViewModel: reviewViewModel)
+                AddReviewView(reviewViewModel: reviewViewModel, movieViewModel: movieViewModel)
             }
         }
     }
 }
 
 #Preview {
-    ReviewsView(reviewViewModel: ReviewViewModel())
+    ReviewsView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
 }

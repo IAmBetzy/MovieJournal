@@ -8,6 +8,9 @@
 import SwiftUI
 import MapKit
 
+//VINCULAR SELFIE Y MOVIE PIC
+//FALTA LOCaTION
+
 struct ReviewDetailView: View {
     var review: Review
     @StateObject private var locationManager = LocationManager()
@@ -16,7 +19,8 @@ struct ReviewDetailView: View {
     var body: some View {
         ScrollView{
             VStack(spacing: 20){
-                Image(systemName: "photo")
+                Image(review.movie.imageName)
+                //modificar para que se vea bonito
                     .resizable()
                     .frame(width: 200, height: 250)
                     .foregroundColor(.yellow)
@@ -69,5 +73,5 @@ struct ReviewDetailView: View {
 }
 
 #Preview {
-    ReviewDetailView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion"), review: "me encanto", date: Date() , rating: "★★"))
+    ReviewDetailView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "Brother bear"), review: "me encanto", date: Date() , rating: "★★"))
 }

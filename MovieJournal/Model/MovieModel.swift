@@ -15,5 +15,5 @@ struct Movie: Identifiable {
     var year: String
     var description: String  //I added
     var watched: Bool = false
-    var imageName: String?
+    var imageName: String
 }
