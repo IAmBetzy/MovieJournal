@@ -38,7 +38,7 @@ struct MoviesView: View {
                     }
                 }
             }
-            .navigationTitle("Movies")
+            .navigationTitle("Que quieres ver?")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
