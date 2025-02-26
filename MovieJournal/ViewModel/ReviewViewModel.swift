@@ -7,16 +7,20 @@
 
 import Foundation
 import UIKit
+import SwiftUICore
 
 class ReviewViewModel: ObservableObject {
-    @Published public var reviews: [Review] = [
-        //conectar las peliculas correctamente
-        Review(movie: Movie(title: "Aladdin", genre: "fantasy", year: "1992", description: "aladdin y su lampara magica", imageName: "aladdin"), review: "Muy chida", date: Date(), rating: "★★★" ),
-        Review(movie: Movie(title: "Tierra de osos", genre: "fantasy", year: "1999", description: "Un humano se convierte en un oso", imageName: "Brother bear"), review: "Me goofy", date: Date(), rating: "★★" )
-    ]
+    @Published var movieViewModel = MovieViewModel()
+    @Published public var reviews: [Review] = []
+
+    init() {
+        reviews.append(Review(movie: movieViewModel.movies[0], review: "Muy chida", selfie: UIImage(named: "selfie1"), date: Date(), rating: "★★★" ))
+        reviews.append(Review(movie: movieViewModel.movies[1], review: "Me goofy", selfie: UIImage(named: "selfie2"), date: Date(), rating: "★★" ))
+    }
+    
     
     func addReview(movie: Movie, review: String, selfie: UIImage?, date: Date, rating: String, latitude: Double?, longitude: Double?){
-        let newReview = Review(movie: movie, review: review, date: date, rating: rating, latitude: latitude, longitude: longitude)
+        let newReview = Review(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
         reviews.append(newReview)
     }
     

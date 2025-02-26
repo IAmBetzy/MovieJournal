@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-//VINCULAR MOVIE PIC
+//agregar location
 
 struct ReviewRowView: View {
     var review:Review
     
     var body: some View {
         HStack {
-            //Display image
             Image(review.movie.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
@@ -35,5 +34,5 @@ struct ReviewRowView: View {
 }
 
 #Preview {
-    ReviewRowView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"), review: "me encanto", date: Date() , rating: "5 estrellas") )
+    ReviewRowView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"), review: "me encanto", selfie: UIImage(systemName: "photo")!, date: Date() , rating: "5 estrellas") )
 }

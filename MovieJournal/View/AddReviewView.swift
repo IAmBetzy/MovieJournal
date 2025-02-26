@@ -55,7 +55,10 @@ struct AddReviewView: View {
                             Text(rating)
                         }
                     }
-                    //FALTA AGREGAR LA SELFIE Y LA UBI
+                    //falta agregar permisos de todo en ptlist
+                    
+                    //Se supone que te deja escoger entre foto y galeria (checar con kevin)
+                    //FALTA AGREGAR LA UBI
                 }
             }
             .navigationTitle("New Review Entry")

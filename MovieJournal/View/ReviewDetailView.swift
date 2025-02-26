@@ -8,8 +8,8 @@
 import SwiftUI
 import MapKit
 
-//VINCULAR SELFIE Y MOVIE PIC
 //FALTA LOCaTION
+//click en el nombre de la pelicula te lleva a detail view de la pelicula
 
 struct ReviewDetailView: View {
     var review: Review
@@ -22,8 +22,9 @@ struct ReviewDetailView: View {
                 Image(review.movie.imageName)
                 //modificar para que se vea bonito
                     .resizable()
-                    .frame(width: 200, height: 250)
-                    .foregroundColor(.yellow)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 200, height: 250, alignment: .center)
+                    .padding(.top, 30.0)
             }
             HStack {
                 VStack(alignment: .leading, spacing: 10){
@@ -31,7 +32,7 @@ struct ReviewDetailView: View {
                         Text(review.movie.title)
                             .font(.title)
                         Text(review.movie.year)
-                            
+                        
                             .font(.title2)
                             .foregroundColor(.gray)
                         
@@ -39,17 +40,29 @@ struct ReviewDetailView: View {
                             .padding()
                             .font(.subheadline)
                     }
-                    
-                    Text(review.date, style: .date)
-                        .font(.caption)
-                        .foregroundColor(.gray)
+                    HStack(spacing: 5) {
+                        Text("Seen on:")
+                        Text(review.date, style: .date)
+                    }
+                    .font(.caption)
+                    .foregroundColor(.gray)
                     Text(review.review)
                         .font(.subheadline)
                     HStack {
-                        Image(systemName: "photo")
-                            .resizable()
-                            .frame(width: 175, height: 200)
-                            .cornerRadius(15)
+                        if let selfie = review.selfie {
+                            Image(uiImage: selfie)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 175, height: 200)
+                                .cornerRadius(15)
+                        } else {
+                            Image(systemName: "wrongwaysign.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 175, height: 200)
+                                .cornerRadius(15)
+                        }
+                        //cambiar current location por latitude and longitud de review
                         Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
                             .cornerRadius(15)
                         //maybe meter esto al model view
@@ -73,5 +86,5 @@ struct ReviewDetailView: View {
 }
 
 #Preview {
-    ReviewDetailView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "Brother bear"), review: "me encanto", date: Date() , rating: "★★"))
+    ReviewDetailView(review: Review(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"), review: "me encanto", selfie: UIImage(systemName: "photo"), date: Date() , rating: "★★"))
 }

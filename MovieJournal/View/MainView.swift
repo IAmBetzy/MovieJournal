@@ -10,7 +10,7 @@ import UIKit
 
 //FALTA QUE AL DAR CLICK ENTRE A LA VISTA DE DETALLES
 //AGREGAR BARRA DE BUSQUEDA
-//Falta poner toolbar abajo para navegar entre pantalla principal y reviews
+//Que se vean los puros posters
 
 struct MainView: View {
     @ObservedObject var movieViewModel: MovieViewModel
