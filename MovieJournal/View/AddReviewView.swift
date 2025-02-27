@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 //AGREGAR PARA QUE TOME FOTO TAMBIEN
 
 struct AddReviewView: View {
@@ -21,6 +22,7 @@ struct AddReviewView: View {
     @State private var showImagePickerView: Bool = false
     @ObservedObject var reviewViewModel: ReviewViewModel
     @ObservedObject var movieViewModel: MovieViewModel
+    @StateObject private var locationManager = LocationManager()
 
     //pasar al ReviewViewModel
     let ratings = ["★", "★★", "★★★", "★★★★", "★★★★★"]
@@ -60,6 +62,19 @@ struct AddReviewView: View {
                     //Se supone que te deja escoger entre foto y galeria (checar con kevin)
                     //FALTA AGREGAR LA UBI
                 }
+                Section(header: Text("Choose Location")) {
+                    Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
+                        .frame(height: 200)
+                    Button("Obtener ubicación actual") {
+                        locationManager.requestLocation()
+                    }
+                    
+                    if locationManager.showLocationAlert {
+                        Text("Por favor activa los permisos de localización en Ajustes.")
+                            .foregroundColor(.red)
+                            .font(.footnote)
+                    }
+                }
             }
             .navigationTitle("New Review Entry")
             .toolbar{
@@ -67,7 +82,7 @@ struct AddReviewView: View {
                     //El save buttos debe ser activado SOLO cuando se llenaron todos los espacios
                     Button("Save"){
                         //falta poner el espacio de la selfie, tambien en la funcion de add view, se cambia cuando se agregue lo del picker
-                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
+                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
                         presentationMode.wrappedValue.dismiss()
                         
                     }

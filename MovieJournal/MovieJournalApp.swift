@@ -11,7 +11,7 @@ import SwiftUI
 struct MovieJournalApp: App {
     var body: some Scene {
         WindowGroup {
-            ReviewsView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
+            TabsView()
         }
     }
 }

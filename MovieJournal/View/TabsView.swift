@@ -9,7 +9,14 @@ import SwiftUI
 
 struct TabsView: View {
     @State var selectedTab = 0
-
+    @StateObject private var permissionsViewModel = PermissionsViewModel()
+    
+    init() {
+        permissionsViewModel.requestLocationAccess()
+        permissionsViewModel.requestCameraAccess()
+        permissionsViewModel.requestPhotoLibraryAccess()
+        
+    }
         var body: some View {
             NavigationStack {
                 ZStack(alignment: .bottom) {

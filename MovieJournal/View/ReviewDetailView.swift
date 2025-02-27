@@ -14,6 +14,7 @@ import MapKit
 struct ReviewDetailView: View {
     var review: Review
     @StateObject private var locationManager = LocationManager()
+    @State private var trackingMode: MapUserTrackingMode = .follow
 
     
     var body: some View {
@@ -63,8 +64,23 @@ struct ReviewDetailView: View {
                                 .cornerRadius(15)
                         }
                         //cambiar current location por latitude and longitud de review
-                        Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
-                            .cornerRadius(15)
+                        let reviewLocation = (review.latitude != nil && review.longitude != nil) ?
+                        CLLocationCoordinate2D(latitude: review.latitude!, longitude: review.longitude!) : nil
+                        
+                        Map(
+                            coordinateRegion: $locationManager.region,
+                            interactionModes: .all,
+                            showsUserLocation: true,
+                            userTrackingMode: $trackingMode,
+                            annotationItems: reviewLocation != nil ? [reviewLocation(coordinate: reviewLocation!)] : []
+                        ) { location in
+                            MapMarker(coordinate: location.coordinate, tint: .red)
+                        }
+                        
+                        
+                        .frame(height: 200)
+                        .cornerRadius(10)
+                        .shadow(radius: 5)
                         //maybe meter esto al model view
                             .onAppear {
                                 locationManager.requestLocation()

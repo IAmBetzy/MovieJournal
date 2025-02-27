@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "427F14F3-FBD3-478C-A618-659C87FCA967",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "locationScenario" : {
+      "identifier" : "Berlin, Germany",
+      "referenceType" : "built-in"
+    },
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MovieJournal.xcodeproj",
+      "identifier" : "2D1D96442D66E411005DE5B3",
+      "name" : "MovieJournal"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MovieJournal.xcodeproj",
+        "identifier" : "2D1D96542D66E413005DE5B3",
+        "name" : "MovieJournalTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MovieJournal.xcodeproj",
+        "identifier" : "2D1D965E2D66E413005DE5B3",
+        "name" : "MovieJournalUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

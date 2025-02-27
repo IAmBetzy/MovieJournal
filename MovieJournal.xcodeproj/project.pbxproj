@@ -27,6 +27,7 @@
 		2D1D96452D66E411005DE5B3 /* MovieJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1D96552D66E413005DE5B3 /* MovieJournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieJournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1D965F2D66E413005DE5B3 /* MovieJournalUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieJournalUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D671C002D7024CB00D07E00 /* MovieJournal.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = MovieJournal.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -70,6 +71,7 @@
 		2D1D963C2D66E411005DE5B3 = {
 			isa = PBXGroup;
 			children = (
+				2D671C002D7024CB00D07E00 /* MovieJournal.xctestplan */,
 				2D1D96622D66E413005DE5B3 /* MovieJournalUITests */,
 				2D1D96472D66E411005DE5B3 /* MovieJournal */,
 				2D1D96462D66E411005DE5B3 /* Products */,
@@ -389,6 +391,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieJournal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Permite el acceso a la camara";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permite el acceso a tu ubicacion al usar la app";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permite el acceso a la galeria";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -417,6 +422,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"MovieJournal/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Permite el acceso a la camara";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permite el acceso a tu ubicacion al usar la app";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permite el acceso a la galeria";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
