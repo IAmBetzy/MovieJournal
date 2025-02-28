@@ -7,19 +7,23 @@
 
 import SwiftUI
 import MapKit
-//AGREGAR PARA QUE TOME FOTO TAMBIEN
 
 struct AddReviewView: View {
     @Environment(\.presentationMode) var presentationMode
  
-    @State private var movie = Movie(title: "", genre: "" , year: "", description: "", watched: false, imageName: "")
+    var selectedMovie: Movie?
+    
+    @State private var movie: Movie
     @State private var review = ""
     @State private var selfie: UIImage? = nil
     @State private var date = Date()
     @State private var rating = ""
     @State private var latitude = Double()
     @State private var longitude = Double()
-    @State private var showImagePickerView: Bool = false
+    @State private var showImagePicker = false
+    @State private var showingActionSheet = false
+    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    
     @ObservedObject var reviewViewModel: ReviewViewModel
     @ObservedObject var movieViewModel: MovieViewModel
     @StateObject private var locationManager = LocationManager()
@@ -27,28 +31,47 @@ struct AddReviewView: View {
     //pasar al ReviewViewModel
     let ratings = ["★", "★★", "★★★", "★★★★", "★★★★★"]
 
+    init(reviewViewModel: ReviewViewModel, movieViewModel: MovieViewModel, selectedMovie: Movie? = nil) {
+            self.reviewViewModel = reviewViewModel
+            self.movieViewModel = movieViewModel
+            //se agrego para facilitar al usuario agregar una review directamente de la pelicula
+            self.selectedMovie = selectedMovie
+            _movie = State(initialValue: selectedMovie ?? Movie(title: "", genre: "", year: "", description: "", watched: false, imageName: ""))
+        }
+    
     var body: some View {
         NavigationView{
             Form {
                 Section(header: Text("Add a new review")){
-                    Picker("Select your movie", selection: $movie.title) {
+                    Picker("Select your movie", selection: $movie) {
                         ForEach(movieViewModel.movies, id: \.title) { movie in
-                            Text(movie.title)
+                            Text(movie.title).tag(movie)
                         }
                     }
-                    Button(action: {
-                        showImagePickerView = true
-                    }) {
-                        HStack {
-                            Text("Select Photo")
-                            Spacer()
-                            if let image = selfie {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                            }
+                    HStack{
+                        Button("Añadir foto") {
+                            showingActionSheet = true
                         }
+                        Spacer()
+                        if let image = selfie {
+                            Image(uiImage: image)
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                    }
+                    .actionSheet(isPresented: $showingActionSheet) {
+                        ActionSheet(title: Text("Choose a source"), message: Text("Select the source for your photo"), buttons: [
+                            .default(Text("Camera")) {
+                                sourceType = .camera
+                                showImagePicker = true
+                            },
+                            .default(Text("Gallery")) {
+                                sourceType = .photoLibrary
+                                showImagePicker = true
+                            },
+                            .cancel()
+                        ])
                     }
                     TextField("Review", text: $review)
                     DatePicker("Date", selection: $date)
@@ -57,10 +80,6 @@ struct AddReviewView: View {
                             Text(rating)
                         }
                     }
-                    //falta agregar permisos de todo en ptlist
-                    
-                    //Se supone que te deja escoger entre foto y galeria (checar con kevin)
-                    //FALTA AGREGAR LA UBI
                 }
                 Section(header: Text("Choose Location")) {
                     Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
@@ -78,10 +97,14 @@ struct AddReviewView: View {
             }
             .navigationTitle("New Review Entry")
             .toolbar{
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button("Cancel") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                }
                 ToolbarItem(placement: .navigationBarTrailing){
-                    //El save buttos debe ser activado SOLO cuando se llenaron todos los espacios
                     Button("Save"){
-                        //falta poner el espacio de la selfie, tambien en la funcion de add view, se cambia cuando se agregue lo del picker
+                        movie.watched = true
                         reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
                         presentationMode.wrappedValue.dismiss()
                         
@@ -90,8 +113,8 @@ struct AddReviewView: View {
                 }
                 
             }
-            .sheet(isPresented: $showImagePickerView) {
-                ImagePickerView(image: $selfie)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(selectedImage: $selfie, sourceType: sourceType)
             }
         }
     }

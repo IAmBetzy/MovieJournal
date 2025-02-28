@@ -5,79 +5,64 @@
 //  Created by CETYS Universidad  on 19/02/25.
 //
 
-/*import SwiftUI
-import PhotosUI
+import SwiftUI
 
 struct MovieDetailView: View {
     var movie: Movie
     
-    @State private var selectedImage: UIImage?
+    @ObservedObject var reviewViewModel: ReviewViewModel
+    @ObservedObject var movieViewModel: MovieViewModel
+    @State private var watched = false
     
     var body: some View {
         ScrollView {
-            Image(uiImage: selectedImage ?? UIImage(named: movie.imageName ?? "placeholder") ?? UIImage(systemName: "photo")!)
-                              .resizable()
-                              .scaledToFit()
-                              .frame(height: 150)
-                              .cornerRadius(10)
-                              .shadow(radius: 5)
-                              .padding()
-                              .onTapGesture {
-                                  self.selectImage()
-                              }
+            Image(uiImage: UIImage(named: movie.imageName) ?? UIImage(systemName: "photo")!)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 200, height: 250, alignment: .center)
+                .padding(.top, 30.0)
                 
                 VStack(alignment: .leading, spacing: 20) {
                     Text(movie.title)
                         .font(.title)
                         .bold()
+                        .padding(.top)
                     
                     HStack {
                         Text("Genre: \(movie.genre)")
                         Spacer()
                         Text("Year: \(movie.year)")
                     }
+                    .padding()
                     .font(.subheadline)
                     
-                    
-                    
-                    Toggle(isOn: .constant(movie.watched)) {
-                        Text(movie.watched ? "Watched" : "Not Watched")
+                    HStack{
+                        Button(action: {
+                            watched.toggle()
+                        }) {
+                            HStack {
+                                Image(systemName: watched ? "checkmark.circle.fill" : "xmark.circle.fill")
+                                    .foregroundColor(watched ? .green : .red)
+                                Text(watched ? "Watched" : "Not Watched")
+                            }
+                        }
+                        Spacer()
+                        NavigationLink(destination: AddReviewView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel(), selectedMovie: movie)) {
+                            Text("Agrega una reseña")
+                        }
                     }
-                    .disabled(true)
                 }
                 .padding()
                 .navigationTitle("Movie Details")
                 
-                Text("Para que quieres detalles de la pelicula we nomas ponte a verla esta chila.")
+            Text(movie.description)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)
                     .foregroundColor(.gray)
             }
         }
-        .navigationTitle("Deja tu reseña de la pelicula!")
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing){
-                Button(action: {
-                    showAddMoodView = true
-                }) {
-                    Image(systemName: "plus")
-                }
-            }
-            ToolbarItem(placement: .navigationBarLeading){
-                EditButton()
-            }
-        }
-        
-        func selectImage() {
-            // Función para seleccionar una imagen de la galería o tomar una nueva foto.
-            // Esto es solo un placeholder, necesitarías implementar la selección de imagen aquí.
-        }
     }
-struct MovieDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleMovie = Movie(title: "Aladdin", genre: "fantasy", year: 1992, description: "aladdin y su lampara magica")
-        
-        MovieDetailView(movie: sampleMovie)
-            .previewDevice("iPhone 12")
-    }
-}*/
+
+#Preview {
+    MovieDetailView(movie: Movie(title: "titulo", genre: "genre", year: "1999", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", watched: false, imageName: "photo"), reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
+}

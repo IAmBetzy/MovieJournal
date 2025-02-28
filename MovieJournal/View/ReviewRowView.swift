@@ -16,7 +16,7 @@ struct ReviewRowView: View {
             Image(review.movie.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                .frame(width: 60, height: 70, alignment: .center)//que obtenga la foto desde la pelicula enlazada (cambiar movie row primero)
+                .frame(width: 60, height: 70, alignment: .center)
             VStack(alignment: .leading) {
                 Text(review.movie.title)
                     .font(.headline)

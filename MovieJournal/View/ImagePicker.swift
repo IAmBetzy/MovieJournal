@@ -6,7 +6,30 @@
 //
 
 import SwiftUI
-
+import UIKit
+class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    @IBOutlet var imageView: UIImageView!
+    var imagePicker = UIImagePickerController()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imagePicker.delegate = self
+    }
+    
+    @IBAction func takeImageButton( sender: Any) {
+        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = false
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    func imagePickerController( picker: UIImagePickerController, didFinishPickingMediaWithInfo info:
+        [UIImagePickerController.InfoKey: Any]){
+        let image = info[.originalImage] as? UIImage
+        imageView.image = image
+        self.dismiss(animated: true, completion: nil)
+    }
+}
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var selectedImage: UIImage?
     @Environment(\.presentationMode) var presentationMode
@@ -18,7 +41,8 @@ struct ImagePicker: UIViewControllerRepresentable {
         picker.sourceType = sourceType
         return picker
     }
-
+    
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
     }
 

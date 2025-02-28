@@ -14,8 +14,8 @@ class ReviewViewModel: ObservableObject {
     @Published public var reviews: [Review] = []
 
     init() {
-        reviews.append(Review(movie: movieViewModel.movies[0], review: "Muy chida", selfie: UIImage(named: "selfie1"), date: Date(), rating: "★★★" ))
-        reviews.append(Review(movie: movieViewModel.movies[1], review: "Me goofy", selfie: UIImage(named: "selfie2"), date: Date(), rating: "★★" ))
+        reviews.append(Review(movie: movieViewModel.movies[0], review: "Muy chida", selfie: UIImage(named: "selfie1"), date: Date(),  rating: "★★★", latitude: 32.5149, longitude: -117.0382 ))
+        reviews.append(Review(movie: movieViewModel.movies[1], review: "Me goofy", selfie: UIImage(named: "selfie2"), date: Date(), rating: "★★", latitude: 32.5027, longitude: -116.9975 ))
     }
     
     

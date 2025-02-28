@@ -10,8 +10,8 @@ import UIKit
 
 class MovieViewModel: ObservableObject {
     @Published public var movies: [Movie] = [
-        Movie(title: "Aladdin", genre: "fantasy", year: "1992", description: "Un joven encuentra una lámpara mágica.", imageName: "aladdin"),
-            Movie(title: "Tierra de osos", genre: "adventure", year: "2003", description: "Un humano se convierte en un oso.", imageName: "brother_bear"),
+        Movie(title: "Aladdin", genre: "fantasy", year: "1992", description: "Un joven encuentra una lámpara mágica.", watched: true, imageName: "aladdin"),
+        Movie(title: "Tierra de osos", genre: "adventure", year: "2003", description: "Un humano se convierte en un oso.", watched: true, imageName: "brother_bear"),
             Movie(title: "The Lion King", genre: "adventure", year: "1994", description: "Un joven león busca su destino tras la muerte de su padre.", imageName: "the_lion_king"),
             Movie(title: "La La Land", genre: "romance", year: "2016", description: "Un pianista y una actriz persiguen sus sueños en Los Ángeles.", imageName: "la_la_land"),
             Movie(title: "Inception", genre: "sci-fi", year: "2010", description: "Un ladrón entra en los sueños de las personas para robar secretos.", imageName: "inception"),

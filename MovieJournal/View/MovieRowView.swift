@@ -12,12 +12,10 @@ struct MovieRowView: View {
     
     var body: some View {
         HStack {
-            //Display image
             Image(movie.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 70, alignment: .center)
-            //cambiar para que la foto la saque de la base
                 .font(.largeTitle)
             VStack(alignment: .leading) {
                 Text(movie.title)

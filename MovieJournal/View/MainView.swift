@@ -8,19 +8,16 @@
 import SwiftUI
 import UIKit
 
-//FALTA QUE AL DAR CLICK ENTRE A LA VISTA DE DETALLES
 //AGREGAR BARRA DE BUSQUEDA
 //Que se vean los puros posters
 
 struct MainView: View {
     @ObservedObject var movieViewModel: MovieViewModel
-    //cambiar para que acceda a los datos desde Movies
     
     var body: some View {
         NavigationView {
             List{
-                //first MovieRowView must be changed for MovieDetailView
-                ForEach(movieViewModel.movies) {movie in NavigationLink(destination: MovieRowView(movie: movie)) {
+                ForEach(movieViewModel.movies) {movie in NavigationLink(destination: MovieDetailView(movie: movie, reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())) {
                     MovieRowView(movie: movie)
                         .padding(.leading, -4.0)
                         .padding(.vertical, 3.0)
