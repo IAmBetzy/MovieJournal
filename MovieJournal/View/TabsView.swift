@@ -7,10 +7,12 @@
 
 import SwiftUI
 
+//View para navegar entre la pantalla principal y la pantalla de las reseñas
 struct TabsView: View {
     @State var selectedTab = 0
     @StateObject private var permissionsViewModel = PermissionsViewModel()
     
+    //Al entrar a la aplicacion pregunta por todos los permisos de privacidad del usuario
     init() {
         permissionsViewModel.requestLocationAccess()
         permissionsViewModel.requestCameraAccess()
@@ -19,6 +21,7 @@ struct TabsView: View {
     }
         var body: some View {
             NavigationStack {
+                //Un boton para la pantalla principal y un boton para la pantalla de reviews
                 ZStack(alignment: .bottom) {
                     TabView(selection: $selectedTab) {
                         MainView(movieViewModel: MovieViewModel())
@@ -30,6 +33,7 @@ struct TabsView: View {
                     ZStack {
                         HStack {
                             Spacer()
+                            //Visual de los botones, su imagen depende de la pantalla en la que el usuario se encuentre y es elegida por la funcion CustonTabItem
                             Button {
                                 selectedTab = 0
                             } label: {
@@ -57,13 +61,13 @@ struct TabsView: View {
 
 
 extension TabsView{
+    //TabItem determina si cierta pantalla esta activa, y con ello especifica la imagen del boton que muestra al usuario
     func CustomTabItem(imageName: String, imageName2: String, title: String, isActive: Bool) -> some View{
         VStack(spacing: 10){
             Spacer()
             Image(systemName: isActive ? imageName2 : imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-                //.renderingMode(.template)
                 .foregroundColor(isActive ? .black : .gray)
                 .frame(width: 15, height: 24)
                 

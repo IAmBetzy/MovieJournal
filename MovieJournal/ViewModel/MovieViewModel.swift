@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+//ViewModel de las peliculas. La pequeña base de datos con la que trabajamos para el proyecto
 class MovieViewModel: ObservableObject {
     @Published public var movies: [Movie] = [
         Movie(title: "Aladdin", genre: "fantasy", year: "1992", description: "Un joven encuentra una lámpara mágica.", watched: true, imageName: "aladdin"),

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//DetailView de cada pelicula en la que se muestran los datos
 struct MovieDetailView: View {
     var movie: Movie
     
@@ -16,18 +17,19 @@ struct MovieDetailView: View {
     
     var body: some View {
         ScrollView {
+            //Se muestra la portada de la pelicula
             Image(uiImage: UIImage(named: movie.imageName) ?? UIImage(systemName: "photo")!)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 200, height: 250, alignment: .center)
                 .padding(.top, 30.0)
                 
+            //se muestra el titulo, genre y año de la pelicula
                 VStack(alignment: .leading, spacing: 20) {
                     Text(movie.title)
                         .font(.title)
                         .bold()
                         .padding(.top)
-                    
                     HStack {
                         Text("Genre: \(movie.genre)")
                         Spacer()
@@ -36,6 +38,7 @@ struct MovieDetailView: View {
                     .padding()
                     .font(.subheadline)
                     
+                    //boton para marcar si la pelicula ya se vio o no
                     HStack{
                         Button(action: {
                             watched.toggle()
@@ -47,6 +50,7 @@ struct MovieDetailView: View {
                             }
                         }
                         Spacer()
+                        //NavigationLink para agregar una reseña de la pelicula en cuestion
                         NavigationLink(destination: AddReviewView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel(), selectedMovie: movie)) {
                             Text("Agrega una reseña")
                         }
@@ -54,7 +58,7 @@ struct MovieDetailView: View {
                 }
                 .padding()
                 .navigationTitle("Movie Details")
-                
+                //descripcion de la pelicula
             Text(movie.description)
                     .multilineTextAlignment(.leading)
                     .padding(.horizontal)

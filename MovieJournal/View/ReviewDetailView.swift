@@ -8,10 +8,9 @@
 import SwiftUI
 import MapKit
 
-//FALTA LOCaTION
-//click en el nombre de la pelicula te lleva a detail view de la pelicula
+//Vista que muestra a detalle una reseña
 
-//maybe inside view model
+//Estructura para mostrar la ubicacion guardada en la reseña (dada por los attributos latitude y longitude)
 struct ReviewLocation: Identifiable {
     let id = UUID()
     let coordinate: CLLocationCoordinate2D
@@ -26,8 +25,8 @@ struct ReviewDetailView: View {
     var body: some View {
         ScrollView{
             VStack(spacing: 20){
+                //Muestra la imagen de la pelicula a la que se hizo review
                 Image(review.movie.imageName)
-                //modificar para que se vea bonito
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 200, height: 250, alignment: .center)
@@ -35,35 +34,28 @@ struct ReviewDetailView: View {
             }
             HStack {
                 VStack(alignment: .leading, spacing: 10){
-                    HStack(alignment: .bottom) {
-                        ZStack{
-                            NavigationLink(destination: MovieDetailView(movie: review.movie, reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())) {
-                                Text(review.movie.title)
-                                    .font(.title)
-                                    .foregroundStyle(.primary)
-                            }
-                            //tapa lo de arriba pq no supe como hacer el texto bonito (black no funciona por nightmode)
-                            Text(review.movie.title)
+                    //Muestra el titulo y el año de la pelicula en cuestion, asi como el rating que el usuario le dio en esta reseña
+                    HStack() {
+                        Text(review.movie.title)
                                 .font(.title)
-                        }
-                        
                         Text(review.movie.year)
-                        
                             .font(.title2)
                             .foregroundColor(.gray)
-                        
                         Text(review.rating)
                             .padding()
                             .font(.subheadline)
                     }
+                    //Fecha en la que el usuario vio la pelicula
                     HStack(spacing: 5) {
                         Text("Seen on:")
                         Text(review.date, style: .date)
                     }
                     .font(.caption)
                     .foregroundColor(.gray)
+                    //Comentarios del usuario acerca de la pelicula
                     Text(review.review)
                         .font(.subheadline)
+                    //Foto que subio el usuario al realizar la reseña
                     HStack {
                         if let selfie = review.selfie {
                             Image(uiImage: selfie)
@@ -79,13 +71,12 @@ struct ReviewDetailView: View {
                                 .cornerRadius(15)
                         }
                     }
+                    //Muestra la ubicacion en la que se encontraba el usuario al hacer la reseña y su ubicacion actual
                     Text("Ubicación")
                         .font(.headline)
                         .foregroundColor(.gray)
-                    
                     let reviewLocation = (review.latitude != nil && review.longitude != nil) ?
                     CLLocationCoordinate2D(latitude: review.latitude!, longitude: review.longitude!) : nil
-                    
                     Map(
                         coordinateRegion: $locationManager.region,
                         interactionModes: .all,

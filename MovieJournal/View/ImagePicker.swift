@@ -7,6 +7,8 @@
 
 import SwiftUI
 import UIKit
+
+//Se edito el documento para que la pantalla que se abra (galeria o camara) depende del sourceType ingresado
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBOutlet var imageView: UIImageView!

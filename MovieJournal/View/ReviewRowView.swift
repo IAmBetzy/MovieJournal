@@ -6,17 +6,19 @@
 //
 
 import SwiftUI
-//agregar location
 
+//View de la fila de las reseñas que se encuentra en ReviewsView
 struct ReviewRowView: View {
     var review:Review
     
     var body: some View {
         HStack {
+            //Muestra la imagen de la pelicula
             Image(review.movie.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 70, alignment: .center)
+            //Muestra el titulo, el puntaje y la fecha en la que se realizo la reseña
             VStack(alignment: .leading) {
                 Text(review.movie.title)
                     .font(.headline)
