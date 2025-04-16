@@ -17,6 +17,8 @@ struct TabsView: View {
         permissionsViewModel.requestLocationAccess()
         permissionsViewModel.requestCameraAccess()
         permissionsViewModel.requestPhotoLibraryAccess()
+        //agregar
+        //permissionsViewModel.requestMicrophoneAccess()
         
     }
         var body: some View {
@@ -24,10 +26,14 @@ struct TabsView: View {
                 //Un boton para la pantalla principal y un boton para la pantalla de reviews
                 ZStack(alignment: .bottom) {
                     TabView(selection: $selectedTab) {
+                        //estoy creando una nueva instancia, quitar
                         MainView(movieViewModel: MovieViewModel())
                             .tag(0)
-                        ReviewsView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
+                        LiveViewWrapper()
                             .tag(1)
+                        //estoy creando una nueva instancia, quitar
+                        ReviewsView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
+                            .tag(2)
                     }
 
                     ZStack {
@@ -43,7 +49,14 @@ struct TabsView: View {
                             Button {
                                 selectedTab = 1
                             } label: {
-                                CustomTabItem(imageName: "list.bullet.rectangle.portrait", imageName2: "list.bullet.rectangle.portrait.fill", title: "Reviews", isActive: (selectedTab == 1))
+                                CustomTabItem(imageName: "camera", imageName2: "camera.fill", title: "", isActive: (selectedTab == 1))
+                            }
+                            Spacer()
+                            Button {
+                                selectedTab = 2
+                            } label: {
+                                CustomTabItem(imageName: "list.bullet.rectangle.portrait", imageName2: "list.bullet.rectangle.portrait.fill", title: "Reviews", isActive: (selectedTab == 2))
+                                
                             }
                             Spacer()
                         }

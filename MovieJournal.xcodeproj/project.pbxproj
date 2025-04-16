@@ -392,8 +392,10 @@
 				DEVELOPMENT_TEAM = YKAUR65L7R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permite el acceso a la camara";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permite el acceso a tu ubicacion al usar la app";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Permite el acceso al microfono al usar la app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permite el acceso a la galeria";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -424,8 +426,10 @@
 				DEVELOPMENT_TEAM = YKAUR65L7R;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Permite el acceso a la camara";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Permite el acceso a tu ubicacion al usar la app";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Permite el acceso al microfono al usar la app";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Permite el acceso a la galeria";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
