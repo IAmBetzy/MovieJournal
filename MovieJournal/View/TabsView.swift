@@ -11,6 +11,9 @@ import SwiftUI
 struct TabsView: View {
     @State var selectedTab = 0
     @StateObject private var permissionsViewModel = PermissionsViewModel()
+    @StateObject var movieViewModel = MovieViewModel()
+    @StateObject var reviewViewModel = ReviewViewModel()
+    @StateObject var actorViewModel = ActorViewModel()
     
     //Al entrar a la aplicacion pregunta por todos los permisos de privacidad del usuario
     init() {
@@ -27,12 +30,12 @@ struct TabsView: View {
                 ZStack(alignment: .bottom) {
                     TabView(selection: $selectedTab) {
                         //estoy creando una nueva instancia, quitar
-                        MainView(movieViewModel: MovieViewModel())
+                        MainView(movieViewModel: movieViewModel)
                             .tag(0)
-                        LiveViewWrapper()
+                        IdentifyActorView(actorViewModel: actorViewModel, selectedTab: $selectedTab)
                             .tag(1)
                         //estoy creando una nueva instancia, quitar
-                        ReviewsView(reviewViewModel: ReviewViewModel(), movieViewModel: MovieViewModel())
+                        ReviewsView(reviewViewModel: reviewViewModel, movieViewModel: movieViewModel)
                             .tag(2)
                     }
 
