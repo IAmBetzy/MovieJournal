@@ -41,7 +41,7 @@ extension LiveViewModel: LiveScreenDelegate {
         
         //Para realizar las predicciones (De manera asincronica)
         DispatchQueue.global(qos: .userInitiated).async {
-            guard let model = try? MovieActorClassifier_6(configuration: MLModelConfiguration()) else { return }
+            guard let model = try? MovieActorClassifier2_5(configuration: MLModelConfiguration()) else { return }
             do {
                 let prediction = try model.prediction(image: pixelBuffer)
                 //Actualiza la prediccion constantemente.
