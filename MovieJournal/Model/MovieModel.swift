@@ -11,7 +11,7 @@ import UIKit
 //Movie struct
 //Las peliculas cuantan con los siguientes atributos, se utilizo una estructura hashable para
 //poder usar las peliculas dentro del picker en el form de AddReviewView
-struct Movie: Identifiable, Hashable {
+struct Movie: Codable, Identifiable, Hashable {
     let id = UUID()
     var title: String
     var genre: String

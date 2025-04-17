@@ -9,6 +9,7 @@ import UIKit
 
 //Review struct
 //Las reviews cuantan con los siguientes atributos
+//Se cambio para ser persistente
 struct Review: Identifiable {
     let id = UUID()
     var movie: Movie            //Asociada a una pelicula
