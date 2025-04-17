@@ -119,7 +119,15 @@ struct AddReviewView: View {
                     Button("Save"){
                         //automaticamente se marca la pelicula como vista
                         movie.watched = true
-                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
+                        
+                        //to add to database
+                        let newReview = PersistenceController.shared.review(movieId: movie.id, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
+                        PersistenceController.shared.saveContext()
+                        reviewViewModel.reviews.append(newReview)
+                        
+//                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
+                        
+                        
                         //al guardar se regresa a la pantalla anterior
                         presentationMode.wrappedValue.dismiss()
                         

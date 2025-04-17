@@ -17,13 +17,13 @@ struct ReviewsView: View {
     @ObservedObject var reviewViewModel: ReviewViewModel
     @ObservedObject var movieViewModel: MovieViewModel
     
-        
     var body: some View {
+        
         NavigationView {
             List{
                 //Se muestran todas las reseñas que ha realizado el usuario
-                ForEach(reviewViewModel.reviews) {review in NavigationLink(destination: ReviewDetailView(review: review)) {
-                    ReviewRowView(review: review)
+                ForEach(reviewViewModel.reviews) {review in NavigationLink(destination: ReviewDetailView(review: review, movieViewModel: movieViewModel)) {
+                    ReviewRowView(review: review, movieViewModel: movieViewModel)
                         .padding(.leading, -4.0)
                         .padding(.vertical, 3.0)
                 }

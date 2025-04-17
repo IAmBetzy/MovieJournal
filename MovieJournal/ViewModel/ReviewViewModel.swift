@@ -13,12 +13,33 @@ import CoreData
 //ViewModel de las reseñas. 2 reseñas guardads y las funciones correspondientes
 class ReviewViewModel: ObservableObject {
     @Published var movieViewModel = MovieViewModel()
-    @Published public var reviews: [Review] = []
+    @Published public var reviews: [ReviewEntity] = PersistenceController.shared.reviews()
     let context = PersistenceController.shared.container.viewContext
     
     init() {
-        reviews.append(Review(movie: movieViewModel.movies[0], review: "Muy chida", selfie: UIImage(named: "selfie1"), date: Date(),  rating: "★★★", latitude: 32.5149, longitude: -117.0382 ))
-        reviews.append(Review(movie: movieViewModel.movies[1], review: "Me goofy", selfie: UIImage(named: "selfie2"), date: Date(), rating: "★★", latitude: 32.5027, longitude: -116.9975 ))
+//        reviews.append(Review(movie: movieViewModel.movies[0], review: "Muy chida", selfie: UIImage(named: "selfie1"), date: Date(),  rating: "★★★", latitude: 32.5149, longitude: -117.0382 ))
+//        reviews.append(Review(movie: movieViewModel.movies[1], review: "Me goofy", selfie: UIImage(named: "selfie2"), date: Date(), rating: "★★", latitude: 32.5027, longitude: -116.9975 ))
+        
+        
+//        let review1 = ReviewEntity(context: context)
+//        review1.review = "me gusto"
+//        review1.date = Date()
+//        review1.rating = "★★"
+//        
+//        PersistenceController.shared.saveContext()
+//        
+//        let reviewFetch: NSFetchRequest<ReviewEntity> = ReviewEntity.fetchRequest()
+//        
+//        var reviews: [ReviewEntity] = []
+//        
+//        do {
+//            reviews = try context.fetch(reviewFetch)
+//        } catch {
+//            print("Error")
+//        }
+//        
+//        print(reviews)
+        
     }
     
     //Funcion para agregar una nueva reseña a la  lista de rese;as
@@ -26,52 +47,60 @@ class ReviewViewModel: ObservableObject {
 //        let newReview = Review(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
 //        reviews.append(newReview)
 //    }
-    func addReview(movie: Movie, review: String, selfie: UIImage?, date: Date, rating: String, latitude: Double?, longitude: Double?, context: NSManagedObjectContext) {
-        let reviewEntity = ReviewEntity(context: context)
-        reviewEntity.id = UUID()
-        reviewEntity.movieId = movie.id
-        reviewEntity.review = review
-        reviewEntity.selfie = selfie
-        reviewEntity.date = date
-        reviewEntity.rating = rating
-        reviewEntity.rating = rating
-        reviewEntity.latitude = latitude!
-        reviewEntity.longitude = longitude!
-        
-        do {
-                try context.save()
-            } catch {
-                print("Error guardando review: \(error)")
-            }
-    }
+//    func addReview(movie: Movie, review: String, selfie: UIImage?, date: Date, rating: String, latitude: Double?, longitude: Double?, context: NSManagedObjectContext) {
+//        let reviewEntity = ReviewEntity(context: context)
+//        //reviewEntity.id = UUID()
+//        reviewEntity.movieId = movie.id
+//        reviewEntity.review = review
+//        //to convert to binary data for entity
+//        reviewEntity.selfie = selfie!.jpegData(compressionQuality: 0.8)
+//        reviewEntity.date = date
+//        reviewEntity.rating = rating
+//        if let latitude = latitude, let longitude = longitude {
+//            reviewEntity.latitude = latitude
+//            reviewEntity.longitude = longitude
+//        }
+//        
+//        do {
+//                try context.save()
+//            } catch {
+//                print("Error guardando review: \(error)")
+//            }
+//    }
     
-    func loadReviews(from catalog: [Movie]) {
-            reviews = fetchReviews(context: context, movies: catalog)
-        }
+//    func loadReviews(from catalog: [Movie]) {
+//            reviews = fetchReviews(context: context, movies: catalog)
+//        }
     
-    private func fetchReviews(context: NSManagedObjectContext, movies: [Movie]) -> [Review] {
-            let request: NSFetchRequest<ReviewEntity> = ReviewEntity.fetchRequest()
-            
-            do {
-                let reviewEntities = try context.fetch(request)
-                return reviewEntities.compactMap { entity in
-                    guard let movie = movies.first(where: { $0.id == entity.movieId }) else {
-                        return nil
-                    }
-
-                    return Review(
-                        id: entity.id ?? UUID(),
-                        text: entity.text ?? "",
-                        rating: Int(entity.rating),
-                        movie: movie
-                    )
-                }
-            } catch {
-                print("Error cargando reviews: \(error)")
-                return []
-            }
-        }
     
+    
+//    private func fetchReviews(context: NSManagedObjectContext, movies: [Movie]) -> [Review] {
+//            let request: NSFetchRequest<ReviewEntity> = ReviewEntity.fetchRequest()
+//            
+//            do {
+//                let reviewEntities = try context.fetch(request)
+//                return reviewEntities.compactMap { entity in
+//                    guard let movie = movies.first(where: { $0.id == entity.movieId }) else {
+//                        return nil
+//                    }
+//                    
+//                    return Review(
+//                        id: entity.id ?? UUID(),
+//                        movie: movie,
+//                        review: entity.review ?? "",
+//                        selfie: UIImage(data: entity.selfie),
+//                        date: entity.date ?? Date(),
+//                        rating: entity.rating ?? "",
+//                        latitude: entity.latitude,
+//                        longitude: entity.longitude
+//                    )
+//                }
+//            } catch {
+//                print("Error cargando reviews: \(error)")
+//                return []
+//            }
+//        }
+//    
     //funcion para eliminar una rese;a de la lista de reseñas
     func deleteReview(at offset: IndexSet) {
         reviews.remove(atOffsets: offset)
