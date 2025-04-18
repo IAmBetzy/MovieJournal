@@ -51,6 +51,11 @@ extension LiveViewModel: LiveScreenDelegate {
                     //para guardar las predicciones hechas en la sesion, no se deben repetir
                     if !self.actorQueue.contains(prediction.target) {
                         self.actorQueue.insert(prediction.target, at: 0)
+                    } else {
+                        if let firstIndex = self.actorQueue.firstIndex(where: {$0 == prediction.target}) {
+                            self.actorQueue.remove(at: firstIndex)
+                            self.actorQueue.insert(prediction.target, at: 0)
+                        }
                     }
                     
                 }

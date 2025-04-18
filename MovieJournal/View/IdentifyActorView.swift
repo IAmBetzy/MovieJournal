@@ -18,6 +18,7 @@ struct IdentifyActorView: View {
         ZStack(alignment: .bottom) {
             //LiveVideo
             LivePreviewView(session: liveViewModel.liveScreen.session)
+//            LiveViewWrapper()
                 .edgesIgnoringSafeArea(.all)
             
             //prediction
