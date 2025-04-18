@@ -34,5 +34,5 @@ struct MovieRowView: View {
 }
 
 #Preview{
-    MovieRowView(movie: Movie(title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"))
+    MovieRowView(movie: Movie(intId: UUID(uuidString: "")!, title: "tituloo", genre: "genero", year: "año", description: "descripcion", imageName: "aladdin"))
 }

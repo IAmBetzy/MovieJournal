@@ -39,7 +39,7 @@ struct AddReviewView: View {
             self.movieViewModel = movieViewModel
             //se agrego para facilitar al usuario agregar una review directamente de la pelicula
             self.selectedMovie = selectedMovie
-            _movie = State(initialValue: selectedMovie ?? Movie(title: "", genre: "", year: "", description: "", watched: false, imageName: ""))
+        _movie = State(initialValue: selectedMovie ?? Movie(intId: UUID(uuid: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)), title: "", genre: "", year: "", description: "", watched: false, imageName: ""))
         }
     
     var body: some View {
@@ -119,7 +119,15 @@ struct AddReviewView: View {
                     Button("Save"){
                         //automaticamente se marca la pelicula como vista
                         movie.watched = true
-                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
+                        
+                        //to add to database
+                        let newReview = PersistenceController.shared.review(movieId: movie.intId, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
+                        PersistenceController.shared.saveContext()
+                        reviewViewModel.reviews.append(newReview)
+                        
+//                        reviewViewModel.addReview(movie: movie, review: review, selfie: selfie, date: date, rating: rating, latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
+                        
+                        
                         //al guardar se regresa a la pantalla anterior
                         presentationMode.wrappedValue.dismiss()
                         
