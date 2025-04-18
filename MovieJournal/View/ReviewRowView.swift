@@ -14,7 +14,7 @@ struct ReviewRowView: View {
     
     var body: some View {
         //buscar entre peliculas con id igual
-        let movie = movieViewModel.movies.first(where: { $0.id == review.movieId })
+        let movie = movieViewModel.movies.first(where: { $0.intId == review.movieId })
 //        guard let movie = movieViewModel.movies.first(where: { $0.id == review.movieId }) else {
 //            Text("No se encontro la pelicula")
 //        }

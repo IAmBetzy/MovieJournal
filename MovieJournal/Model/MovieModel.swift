@@ -13,6 +13,7 @@ import UIKit
 //poder usar las peliculas dentro del picker en el form de AddReviewView
 struct Movie: Codable, Identifiable, Hashable {
     let id = UUID()
+    let intId: UUID
     var title: String
     var genre: String
     var year: String

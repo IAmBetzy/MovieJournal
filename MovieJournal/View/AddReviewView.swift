@@ -39,7 +39,7 @@ struct AddReviewView: View {
             self.movieViewModel = movieViewModel
             //se agrego para facilitar al usuario agregar una review directamente de la pelicula
             self.selectedMovie = selectedMovie
-            _movie = State(initialValue: selectedMovie ?? Movie(title: "", genre: "", year: "", description: "", watched: false, imageName: ""))
+        _movie = State(initialValue: selectedMovie ?? Movie(intId: UUID(uuid: (0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)), title: "", genre: "", year: "", description: "", watched: false, imageName: ""))
         }
     
     var body: some View {
@@ -121,7 +121,7 @@ struct AddReviewView: View {
                         movie.watched = true
                         
                         //to add to database
-                        let newReview = PersistenceController.shared.review(movieId: movie.id, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
+                        let newReview = PersistenceController.shared.review(movieId: movie.intId, review: review, selfie: selfie, date: date, rating: rating, latitude: latitude, longitude: longitude)
                         PersistenceController.shared.saveContext()
                         reviewViewModel.reviews.append(newReview)
                         
