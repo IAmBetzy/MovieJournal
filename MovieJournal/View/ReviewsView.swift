@@ -30,7 +30,8 @@ struct ReviewsView: View {
                     
                 }
                 //Para eliminar una reseña
-                .onDelete(perform: reviewViewModel.deleteReview)
+                .onDelete(perform: PersistenceController.shared.delete)
+                    
             }
             .navigationTitle(Text("Reviews"))
             .toolbar{

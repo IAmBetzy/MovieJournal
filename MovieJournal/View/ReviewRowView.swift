@@ -29,10 +29,10 @@ struct ReviewRowView: View {
             VStack(alignment: .leading) {
                 Text(movie?.title ?? "Titulo")
                     .font(.headline)
-                Text(review.rating!)
+                Text(review.rating ?? "★★")
                     .font(.subheadline)
                     .foregroundColor(.gray)
-                Text(review.date!.formatted(date: .numeric, time: .omitted))
+                Text(review.date?.formatted(date: .numeric, time: .omitted) ?? Date().formatted(date: .numeric, time: .omitted))
                     .font(.subheadline)
                     .foregroundColor(.gray)
                 

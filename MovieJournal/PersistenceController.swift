@@ -54,26 +54,13 @@ struct PersistenceController {
         return fetchedReviews
     }
     
-//    func addReview(movie: Movie, review: String, selfie: UIImage?, date: Date, rating: String, latitude: Double?, longitude: Double?, context: NSManagedObjectContext) {
-//        let reviewEntity = ReviewEntity(context: context)
-//        reviewEntity.id = UUID()
-//        reviewEntity.movieId = movie.id
-//        reviewEntity.review = review
-//        //to convert to binary data for entity
-//        reviewEntity.selfie = selfie!.jpegData(compressionQuality: 0.8)
-//        reviewEntity.date = date
-//        reviewEntity.rating = rating
-//        if let latitude = latitude, let longitude = longitude {
-//            reviewEntity.latitude = latitude
-//            reviewEntity.longitude = longitude
-//        }
-//        
-//        do {
-//                try context.save()
-//            } catch {
-//                print("Error guardando review: \(error)")
-//            }
-//    }
+    func delete(at offsets: IndexSet) {
+        for offset in offsets {
+            let review = reviews()[offset]
+            container.viewContext.delete(review)
+        }
+        try? container.viewContext.save()
+    }
     
     func saveContext () {
         let context = container.viewContext
